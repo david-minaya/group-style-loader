@@ -1,10 +1,14 @@
 {
-  "name": "group-class-loader",
   "version": "1.0.0",
+  "name": "group-style-loader",
   "description": "Group the styles exported by CSS Modules",
-  "main": "lib/loader.js",
-  "author": "",
+  "author": "David Minaya <davidminaya04@gmail.com>",
+  "homepage": "https://github.com/david-minaya/group-style-loader",
+  "repository": "github:david-minaya/group-style-loader",
+  "bugs": "https://github.com/david-minaya/group-style-loader/issues",
+  "keywords": ["loader", "css", "css module", "webpack"],
   "license": "ISC",
+  "main": "lib/loader.js",
   "scripts": {
     "build": "babel src --out-dir lib",
     "test": "jest"
