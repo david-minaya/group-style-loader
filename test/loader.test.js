@@ -1,0 +1,70 @@
+import { runWebpack } from './runWebpack.js';
+
+it('group the styles using the default separator "_"', async () => {
+  const { style } = await runWebpack('default-separator');
+  expect(style).toEqual(expect.objectContaining({
+    app: expect.any(String),
+    card: {
+      title: expect.any(String),
+      description: expect.any(String)
+    }
+  }));
+});
+
+it('group the styles using the separator "_GROUP_"', async () => {
+  const { style } = await runWebpack('custom-separator', { separator: '_GROUP_' });
+  expect(style).toEqual(expect.objectContaining({
+    app: expect.any(String),
+    card: {
+      title: expect.any(String),
+      description: expect.any(String)
+    }
+  }));
+});
+
+it('merge the default styles with the custom styles', async () => {
+  
+  const result = await runWebpack('merge-style');
+  const { defaultStyle, customStyle, mergedStyle } = result;
+
+  const expected = {
+    title: `${defaultStyle.title} ${customStyle.title}`,
+    description: `${defaultStyle.description} ${customStyle.description}` 
+  }
+
+  expect(expected).toEqual(mergedStyle);
+});
+
+it('set valid options to the loader', async () => {
+  await runWebpack('merge-style', { separator: '_GROUP_' });
+});
+
+it('throw an execption when the loader options are invalid', async () => {
+
+  let thrownTheExecption = false;
+
+  try {
+    await runWebpack('merge-style', { invalidOption: 'invalid' });
+  } catch (err) { 
+    thrownTheExecption = true;
+  }
+
+  if (!thrownTheExecption) {
+    throw 'The exception wasn\'t throw'
+  }
+})
+
+it('throw an execption when the separator contain invalid characteres', async () => {
+
+  let thrownTheExecption = false;
+
+  try {
+    await runWebpack('merge-style', { separator: '?.>' });
+  } catch (err) { 
+    thrownTheExecption = true;
+  }
+
+  if (!thrownTheExecption) {
+    throw 'The exception wasn\'t throw'
+  }
+})
