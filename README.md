@@ -100,7 +100,16 @@ This loader is similar to [style-loader](https://www.npmjs.com/package/style-loa
         rules: [
           {
             test: /\.css$/i,
-            use: ['group-style-loader', 'style-loader', 'css-loader']
+            use: [
+              'group-style-loader', 
+              'style-loader', 
+              {
+                loader: "css-loader",
+                options: {
+                  modules: true
+                }
+              }
+            ]
           }
         ]
       }
@@ -134,8 +143,15 @@ module.exports = {
               separator: '_GROUP_'
             }
           }, 
-          'style-loader', 
-          'css-loader'
+          { 
+            loader: 'style-loader' 
+          }, 
+          {
+            loader: "css-loader",
+            options: {
+              modules: true
+            }
+          }
         ]
       }
     ]
