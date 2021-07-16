@@ -2,7 +2,7 @@
 
 [![npm][npm-badge]][npm-url]
 
-[npm-badge]: https://img.shields.io/npm/v/group-style-loader?color=%23C53635
+[npm-badge]: https://img.shields.io/npm/v/group-style-loader
 [npm-url]: https://npmjs.com/package/group-style-loader
 
 Group the styles exported by CSS Modules.
