@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "group-style-loader",
   "description": "Group the styles exported by CSS Modules",
   "author": "David Minaya <davidminaya04@gmail.com>",
