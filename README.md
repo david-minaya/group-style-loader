@@ -478,58 +478,67 @@ customStyle
 </tr>
 </table>
 
-## CSS pseudo-classes
+## Order of the styles
 
-
-When you are using `pseudo-classes` you need to increase the precedence of the `pseudo-class` to can override the default style. For example, you can use another class to increase the precedence of the `pseudo-class`. In the below example we used the class `.list` to increase the precedence of the pseudo-class `.card_description:hover`.
+Pay attention to the order of import of the styles. In the previous examples, the style of the App component is imported after the import of the Card component. This is important to can overriding the style of children components. If you import the style of the parent component before of to import the children's components, it is possible that the style of the child components doesn't be overridden.
 
 <table>
 <tr>
-<th align='left'>&nbsp;&nbsp;&nbsp;&nbsp;app.css</th>
-<th align='left'>&nbsp;&nbsp;&nbsp;&nbsp;app.jsx</th>
+<th align='left'>&nbsp;&nbsp;&nbsp;&nbsp;❌ &nbsp;Wrong</th>
+<th align='left'>&nbsp;&nbsp;&nbsp;&nbsp;✔️ &nbsp;Well</th>
 </tr>
 <tr>
 <td>
 
-```css
-.title {
-  color: red;
-}
+```js
+import React from 'react';
+import { style } from './app.css';
+import { Card } from './card';
+import { Clock } from './clock';
 
-.list {
-  display: flex;
-}
-
-.card_summary {
-  color: green;
-}
-
-.list .card_summary:hover {
-  background-color: antiquewhite;
+export function App() {
+  return (
+    <div>
+      <h1 className={style.title}>
+        Group style loader
+      </h1>         
+      <div className={style.list}>
+        <Card customStyle={style.card}/>
+        <Clock customStyle={style.clock}/>
+      </div>
+    </div>
+  );
 }
 ```
 
 </td>
 <td>
 
-```jsx
+```js
 import React from 'react';
 import { Card } from './card';
+import { Clock } from './clock';
 import { style } from './app.css';
 
 export function App() {
   return (
     <div>
-      <h1 className={style.title}>Group style</h1>         
+      <h1 className={style.title}>
+        Group style loader
+      </h1>         
       <div className={style.list}>
-        <Card/>
         <Card customStyle={style.card}/>
+        <Clock customStyle={style.clock}/>
       </div>
     </div>
   );
-}  
+}
 ```
 
 </td>
+</tr>
+<tr>
+<td>Is possible that the style of the children components doesn't be overridden.</td>
+<td>The style of the children components going to be overridden successfully.</td>
 </tr>
 </table>

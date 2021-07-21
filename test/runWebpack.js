@@ -4,7 +4,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import execute from './helpers/execute';
 import { createFsFromVolume, Volume } from 'memfs';
 
-export function runWebpack(entry, options) {
+export function runWebpack(entry, options = { }, otherOptions = { }) {
 
   const webpack = Webpack({
     context: path.resolve(__dirname, 'src'),
@@ -23,7 +23,12 @@ export function runWebpack(entry, options) {
               loader: path.resolve(__dirname, '../src/loader.js'),
               options
             },
-            MiniCssExtractPlugin.loader,
+            { 
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                esModule: otherOptions.esModule
+              }
+            },
             {
               loader: "css-loader",
               options: {

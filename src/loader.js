@@ -24,12 +24,13 @@ function pitch(request) {
   }
 
   return `
-    const module = require(${stringifyRequest(this, "!!" + request)});
+    const result = require(${stringifyRequest(this, "!!" + request)});
+    const resultContent = result.__esModule ? result.default : result;
 
-    ${groupStyle.toString()}
-    ${merge.toString()}
+    ${groupStyle}
+    ${merge}
 
-    export const style = groupStyle(module.default, '${separator}');
+    export const style = groupStyle(resultContent, '${separator}');
     export const mergeStyle = merge(style);
   `;
 };
