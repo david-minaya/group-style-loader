@@ -9,7 +9,7 @@ Group the styles exported by CSS Modules.
 
 This loader is similar to [style-loader](https://www.npmjs.com/package/style-loader), with the difference that this loader uses a **separator** to create a style object that can contain other style objects. This is useful when you need to pass the style through different components.
 
-With this loader, you can work with CSS module just like you do with normal CSS, but without losing encapsulation.
+With this loader, work with CSS module is just like work with normal CSS, but without losing encapsulation.
 
 <table>
 <tr>
