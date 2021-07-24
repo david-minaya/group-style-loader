@@ -1,12 +1,12 @@
 {
-  "version": "1.0.4",
+  "version": "1.0.5",
   "name": "group-style-loader",
   "description": "Group the styles exported by CSS Modules",
   "author": "David Minaya <davidminaya04@gmail.com>",
   "homepage": "https://github.com/david-minaya/group-style-loader",
   "repository": "github:david-minaya/group-style-loader",
   "bugs": "https://github.com/david-minaya/group-style-loader/issues",
-  "keywords": ["loader", "css", "css module", "webpack"],
+  "keywords": ["loader", "css", "css module", "webpack", "react", "style loader"],
   "license": "ISC",
   "main": "lib/loader.js",
   "scripts": {

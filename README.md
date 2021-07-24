@@ -9,6 +9,8 @@ Group the styles exported by CSS Modules.
 
 This loader is similar to [style-loader](https://www.npmjs.com/package/style-loader), with the difference that this loader uses a **separator** to create a style object that can contain other style objects. This is useful when you need to pass the style through different components.
 
+With this loader, you can work with CSS module just like you do with normal CSS, but without losing encapsulation.
+
 <table>
 <tr>
 <th align='left'>&nbsp;&nbsp;&nbsp;&nbsp;style.css</th>
@@ -173,7 +175,7 @@ console.log(style);
       
       
       
-        
+
     ```
 
     </td>
@@ -240,7 +242,7 @@ module.exports = {
 
 
 
-  
+
 ```
 
 </td>
@@ -309,7 +311,7 @@ export function App() {
   );
 }
 
-  
+
 ```
 
 </td>
@@ -448,7 +450,7 @@ customStyle
 }
 
 */
-  
+
 ```
 
 </td>
@@ -540,5 +542,117 @@ export function App() {
 <tr>
 <td>Is possible that the style of the children components doesn't be overridden.</td>
 <td>The style of the children components going to be overridden successfully.</td>
+</tr>
+</table>
+
+## Use with CSSTransition
+
+This loader is useful when you are working with CSSTransition together with CSS module. With this loader, you can pass the animation classes on a single line.
+
+<table>
+<tr>
+<th align='left' colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;style.css</th>
+</tr>
+<tr>
+<td colspan="2">
+
+
+```css
+.animation_enter {
+  opacity: 0;
+}
+
+.animation_enterActive {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+
+.animation_exit {
+  opacity: 1;
+}
+
+.animation_exitActive {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+```
+
+</td>
+</tr>
+<tr>
+<th align='left'>&nbsp;&nbsp;&nbsp;&nbsp;CSSTransition</th>
+<th align='left'>&nbsp;&nbsp;&nbsp;&nbsp;CSSTransition with group-style-loader</th>
+</tr>
+<tr>
+<td>
+
+```js 
+import React, { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { style } from './style.css';
+
+export function App() {
+
+  const [enable, setEnable] = useState(false);
+  
+  return (
+    <div>
+      <CSSTransition 
+        in={enable} 
+        timeout={200} 
+        classNames={{
+          enter: style.animation_enter,
+          enterActive: style.animation_enterActive,
+          exit: style.animation_exit,
+          exitActive: style.animation_exitActive
+        }}>
+        <div>Element with animation</div>
+      </CSSTransition>
+      <button 
+        type="button" 
+        onClick={() => setEnable(true)}>
+        Click to Enter
+      </button>
+    </div>
+  );
+}
+```
+
+</td>
+<td>
+
+```js 
+import React, { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { style } from './style.css';
+
+export function App() {
+
+  const [enable, setEnable] = useState(false);
+  
+  return (
+    <div>
+      <CSSTransition 
+        in={enable} 
+        timeout={200} 
+        classNames={style.animation}>
+        <div>Element with animation</div>
+      </CSSTransition>
+      <button 
+        type="button" 
+        onClick={() => setEnable(true)}>
+        Click to Enter
+      </button>
+    </div>
+  );
+}
+
+
+
+
+
+```
+
+</td>
 </tr>
 </table>
